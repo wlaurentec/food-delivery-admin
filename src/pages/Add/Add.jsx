@@ -2,6 +2,7 @@ import { useState } from "react";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import "./Add.css";
+import { toast } from "react-toastify";
 
 const Add = () => {
 
@@ -17,7 +18,6 @@ const Add = () => {
   const onChangeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-
     //setData({ ...data, [name]: value }); revisar esta linea en algun momento encontraremos la diferencia
     setData((data) => ({ ...data, [name]: value }));
   };
@@ -33,7 +33,6 @@ const Add = () => {
     const response = await axios.post(`${url}/api/food/add`, formData);
 
     if (response.data.success) {
-      alert("Product added successfully");
       setData({
         name: "",
         description: "",
@@ -41,6 +40,7 @@ const Add = () => {
         category: "Salad",
       });
       setImage(false);
+      toast.success(response.data.message);
     }
   };
 
