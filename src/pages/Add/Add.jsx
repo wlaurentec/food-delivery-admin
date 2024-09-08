@@ -4,9 +4,8 @@ import axios from "axios";
 import "./Add.css";
 import { toast } from "react-toastify";
 
-const Add = () => {
+const Add = ({ url }) => {
 
-  const url = "http://localhost:4000";
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -41,6 +40,8 @@ const Add = () => {
       });
       setImage(false);
       toast.success(response.data.message);
+    } else {
+      toast.error(response.data.message);
     }
   };
 
